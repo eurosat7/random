@@ -9,7 +9,7 @@ class Transformer
     {
         return array_map(
             function (string $value): string {
-                return strtoupper($value);
+                return strtolower($value);
             },
             $set
         );
@@ -19,7 +19,7 @@ class Transformer
     {
         return array_map(
             function (string $value): string {
-                return strtolower($value);
+                return strtoupper($value);
             },
             $set
         );
