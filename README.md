@@ -27,7 +27,7 @@ It has some nice defaults, but you can expand it should you ever need to.
     $mySet = Transformer::removeFromSet($mySet, Charsets::whitespace());
     $sequence = Generator::generate([
         $mySet,
-        Transformer::setToUppercase(Charsets::nonexplosives())
+        Transformer::setToUppercase(Charsets::nonexplosives()),
         [
           ... Charsets::vowels(),
           ... Charsets::umlaut(),
