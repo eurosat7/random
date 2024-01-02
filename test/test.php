@@ -5,6 +5,7 @@
 declare(strict_types=1);
 
 use Eurosat7\Random\Charsets;
+use Eurosat7\Random\CustomGenerator;
 use Eurosat7\Random\Generator;
 use Eurosat7\Random\Transformer;
 
@@ -28,24 +29,24 @@ expect('setToUppercase', Transformer::toUppercase([... Charsets::vowels(), ... C
 expect('setToLowercase', Transformer::toLowercase(['P', 'H', 'P']));
 expect('setToRandomcase', Transformer::toRandomcase([... Charsets::vowels(), ... Charsets::explosives()]));
 
-expect('stringToArray', Transformer::stringToArray('Hello world!'));
+expect('stringToArray', str_split('Hello world!'));
 
 $l = 'l';
 $array = ['H', 'e', $l, $l, 'o'];
 
-expect('arrayToString', Transformer::arrayToString($array));
+expect('arrayToString', implode('', $array));
 //</editor-fold>
 
 //<editor-fold desc="Generator">
 expect('password', Generator::password());
-expect('passwordDE', Generator::passwordDE());
+expect('passwordDE', CustomGenerator::passwordDE());
 expect('numerical', Generator::numerical());
-expect('easy', Generator::easy());
-expect('speakable', Generator::speakable());
+expect('easy', CustomGenerator::easy());
+expect('speakable', CustomGenerator::speakable());
 //</editor-fold>
 
 //<editor-fold desc="power user">
-$mySet = Transformer::stringToArray('All your base are belong to us!');
+$mySet = str_split('All your base are belong to us!');
 $mySet = Transformer::removeFromSet($mySet, ['!']);
 $mySet = Transformer::removeFromSet($mySet, Charsets::whitespace());
 $sequence = Generator::generate([

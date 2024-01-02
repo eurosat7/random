@@ -7,12 +7,12 @@ It has some nice defaults, but you can expand it should you ever need to.
 ## usage
 
 ```php
-    use Eurosat7\Random\Generator;
+    use Eurosat7\Random\CustomGenerator;use Eurosat7\Random\Generator;
     
     $numerical = Generator::numerical();
     $password = Generator::password();
-    $easy = Generator::easy();
-    $speakable = Generator::speakable();
+    $easy = CustomGenerator::easy();
+    $speakable = CustomGenerator::speakable();
 ```
 
 ### power user
@@ -22,7 +22,7 @@ It has some nice defaults, but you can expand it should you ever need to.
     use Eurosat7\Random\Generator;
     use Eurosat7\Random\Transformer;
 
-    $mySet = Transformer::stringToArray('All your base are belong to us!');
+    $mySet = str_split('All your base are belong to us!');
     $mySet = Transformer::removeFromSet($mySet, ['!']);
     $mySet = Transformer::removeFromSet($mySet, Charsets::whitespace());
     $sequence = Generator::generate([
@@ -52,7 +52,7 @@ When you are done with testing you can stop the docker instance with `make stop`
     make test
 ```
 
-Will run `rector`, `phpcpd`, `phpmd`, `phpstan` and `psalm`.
+Will run `rector`, `phpcpd`, `phpmd`, `phpstan`,  `psalm` and `phan`.
 
 ### check code functionality
 

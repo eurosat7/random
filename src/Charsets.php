@@ -15,9 +15,7 @@ class Charsets
     public static function numeric(): array
     {
         return // range('0', '9');
-            [
-                '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'
-            ];
+            ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
     }
 
     /**
@@ -26,8 +24,8 @@ class Charsets
     public static function special(): array
     {
         return [
-            '!', '"', '#', '$', '%', '&', '\'', '(', ')', '*', '+', ',', '-', '.', '/', ':',
-            ';', '<', '=', '>', '?', '@', '[', '\\', ']', '^', '_', '`', '{', '|', '}', '~',
+            '!', '"', '#', '$', '%', '&', '\'', '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>',
+            '?', '@', '[', '\\', ']', '^', '_', '`', '{', '|', '}', '~',
         ];
     }
 
@@ -36,9 +34,7 @@ class Charsets
      */
     public static function umlaut(): array
     {
-        return [
-            'ä', 'ö', 'ü', 'ß'
-        ];
+        return ['ä', 'ö', 'ü', 'ß'];
     }
 
     /**
@@ -46,10 +42,7 @@ class Charsets
      */
     public static function nonexplosives(): array
     {
-        return Transformer::removeFromSet(
-            self::alphanumeric(),
-            [... self::explosives(), ... self::vowels()]
-        );
+        return Transformer::removeFromSet(self::alphanumeric(), [... self::explosives(), ... self::vowels()]);
     }
 
     /**
@@ -65,9 +58,7 @@ class Charsets
      */
     public static function explosives(): array
     {
-        return [
-            'b', 'd', 'g', 'k', 'p', 't'
-        ];
+        return ['b', 'd', 'g', 'k', 'p', 't'];
     }
 
     /**
@@ -75,9 +66,7 @@ class Charsets
      */
     public static function vowels(): array
     {
-        return [
-            'a', 'e', 'i', 'o', 'u'
-        ];
+        return ['a', 'e', 'i', 'o', 'u'];
     }
 
     /**
