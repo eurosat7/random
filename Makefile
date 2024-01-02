@@ -13,9 +13,7 @@ composer:
 
 start:
 	docker-compose up -d
-	@echo "you can now open the browser to test the upload form: http://localhost:8089/public/"
-	@echo "or adminer to look into the database: http://localhost:8080/?server=mysql-csvimporter&username=csvimporter&db=csv&password=csvimporterpassword"
-	@echo "or telnet with memcached: tcp://localhost:12221"
+	@echo "you can now open the browser at: http://localhost:8189/"
 	@echo "to shutdown docker run: make stop"
 
 stop:
