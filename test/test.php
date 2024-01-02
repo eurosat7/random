@@ -24,9 +24,9 @@ expect('whitespace', Charsets::whitespace());
 
 //<editor-fold desc="Transformer">
 expect('removeFromSet', Transformer::removeFromSet(Charsets::vowels(), ['a', 'o']));
-expect('setToUppercase', Transformer::setToUppercase([... Charsets::vowels(), ... Charsets::explosives()]));
-expect('setToLowercase', Transformer::setToLowercase(['P', 'H', 'P']));
-expect('setToRandomcase', Transformer::setToRandomcase([... Charsets::vowels(), ... Charsets::explosives()]));
+expect('setToUppercase', Transformer::toUppercase([... Charsets::vowels(), ... Charsets::explosives()]));
+expect('setToLowercase', Transformer::toLowercase(['P', 'H', 'P']));
+expect('setToRandomcase', Transformer::toRandomcase([... Charsets::vowels(), ... Charsets::explosives()]));
 
 expect('stringToArray', Transformer::stringToArray('Hello world!'));
 
@@ -50,7 +50,7 @@ $mySet = Transformer::removeFromSet($mySet, ['!']);
 $mySet = Transformer::removeFromSet($mySet, Charsets::whitespace());
 $sequence = Generator::generate([
     $mySet,
-    Transformer::setToUppercase(Charsets::nonexplosives()),
+    Transformer::toUppercase(Charsets::nonexplosives()),
     [
         ... Charsets::vowels(),
         ... Charsets::umlaut(),

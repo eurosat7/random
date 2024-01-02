@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Eurosat7\Random;
@@ -11,7 +12,7 @@ use Random\RandomException;
 class Generator
 {
     /**
-     * @param string[] $set
+     * @param array<int, string> $set
      * @throws RandomException
      */
     private static function pickOne(array $set): string
@@ -25,7 +26,7 @@ class Generator
     }
 
     /**
-     * @param string[][] $sets
+     * @param array<int, array<int, string>> $sets
      * @throws RandomException
      * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
@@ -33,7 +34,8 @@ class Generator
     {
         $result = [];
         $count = 0;
-        while (($count++) < $length) {
+        while ($count < $length) {
+            $count ++;
             foreach ($sets as $set) {
                 $result [] = self::pickOne($set); // we do not remove used elements!
             }
@@ -67,7 +69,7 @@ class Generator
             sets: [
                 Charsets::numeric(),
                 Charsets::alphanumeric(),
-                Transformer::setToUppercase(Charsets::alphanumeric()),
+                Transformer::toUppercase(Charsets::alphanumeric()),
                 Charsets::special(),
             ],
             length: $length
@@ -85,8 +87,8 @@ class Generator
             sets: [
                 Charsets::numeric(),
                 Charsets::alphanumeric(),
-                Transformer::setToUppercase(Charsets::alphanumeric()),
-                [...Charsets::special(), ... Charsets::umlaut(), ... Transformer::setToUppercase(Charsets::umlaut())],
+                Transformer::toUppercase(Charsets::alphanumeric()),
+                [...Charsets::special(), ... Charsets::umlaut(), ... Transformer::toUppercase(Charsets::umlaut())],
             ],
             length: $length
         );
@@ -112,8 +114,12 @@ class Generator
     public static function speakable(int $length = 8): string
     {
         $suffix = (int)ceil(sqrt($length)) - 1;
-        if ($suffix < 1) $suffix = 1;
-        if ($suffix > 3) $suffix = 3;
+        if ($suffix < 1) {
+            $suffix = 1;
+        }
+        if ($suffix > 3) {
+            $suffix = 3;
+        }
 
         $result = self::generate(
             sets: [

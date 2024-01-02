@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Eurosat7\Random;
@@ -9,7 +10,7 @@ namespace Eurosat7\Random;
 class Charsets
 {
     /**
-     * @return string[]
+     * @return array<int, string>
      */
     public static function numeric(): array
     {
@@ -20,7 +21,7 @@ class Charsets
     }
 
     /**
-     * @return string[]
+     * @return array<int, string>
      */
     public static function special(): array
     {
@@ -31,7 +32,7 @@ class Charsets
     }
 
     /**
-     * @return string[]
+     * @return array<int, string>
      */
     public static function umlaut(): array
     {
@@ -41,7 +42,7 @@ class Charsets
     }
 
     /**
-     * @return string[]
+     * @return array<int, string>
      */
     public static function nonexplosives(): array
     {
@@ -52,7 +53,7 @@ class Charsets
     }
 
     /**
-     * @return string[]
+     * @return array<int, string>
      */
     public static function alphanumeric(): array
     {
@@ -60,7 +61,7 @@ class Charsets
     }
 
     /**
-     * @return string[]
+     * @return array<int, string>
      */
     public static function explosives(): array
     {
@@ -70,7 +71,7 @@ class Charsets
     }
 
     /**
-     * @return string[]
+     * @return array<int, string>
      */
     public static function vowels(): array
     {
@@ -80,7 +81,7 @@ class Charsets
     }
 
     /**
-     * @return string[]
+     * @return array<int, string>
      */
     public static function whitespace(): array
     {

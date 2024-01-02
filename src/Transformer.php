@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Eurosat7\Random;
@@ -11,46 +12,46 @@ use Random\RandomException;
 class Transformer
 {
     /**
-     * @param string[] $set
-     * @return string[]
+     * @param array<int, string> $set
+     * @return array<int, string>
      */
-    public static function setToLowercase(array $set): array
+    public static function toLowercase(array $set): array
     {
         return array_map(
-            fn(string $value): string => strtolower($value),
+            static fn(string $value): string => strtolower($value),
             $set
         );
     }
 
     /**
-     * @param string[] $set
-     * @return string[]
+     * @param array<int, string> $set
+     * @return array<int, string>
      */
-    public static function setToUppercase(array $set): array
+    public static function toUppercase(array $set): array
     {
         return array_map(
-            fn(string $value): string => strtoupper($value),
+            static fn(string $value): string => strtoupper($value),
             $set
         );
     }
 
     /**
-     * @param string[] $set
-     * @return string[]
+     * @param array<int, string> $set
+     * @return array<int, string>
      * @throws RandomException
      */
-    public static function setToRandomcase(array $set): array
+    public static function toRandomcase(array $set): array
     {
         return array_map(
-            fn(string $value): string => random_int(0, mt_getrandmax()) % 2 === 0 ? strtoupper($value) : strtolower($value),
+            static fn(string $value): string => random_int(0, mt_getrandmax()) % 2 === 0 ? strtoupper($value) : strtolower($value),
             $set
         );
     }
 
     /**
-     * @param string[] $set
-     * @param string[] $unwanted
-     * @return string[]
+     * @param array<int, string> $set
+     * @param array<int, string> $unwanted
+     * @return array<int, string>
      */
     public static function removeFromSet(array $set, array $unwanted): array
     {
@@ -64,7 +65,7 @@ class Transformer
     }
 
     /**
-     * @param string[] $in
+     * @param array<int, string> $in
      */
     public static function arrayToString(array $in): string
     {
@@ -72,7 +73,7 @@ class Transformer
     }
 
     /**
-     * @return string[]
+     * @return array<int, string>
      */
     public static function stringToArray(string $in): array
     {

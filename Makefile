@@ -40,3 +40,8 @@ docker-php-test:
 docker-test:
 	docker-compose exec webserver make test
 
+normalize:
+	composer normalize
+
+phpinsights:
+	./vendor/bin/phpinsights
