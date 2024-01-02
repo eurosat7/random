@@ -40,6 +40,12 @@ It has some nice defaults, but you can expand it should you ever need to.
 
 Have `make`, `docker` and `docker-compose` installed.
 
+Run `make init` once to install additional developer packages and get the autoloader build.
+
+For testing the docker instance should be started - can be done with `make start`.
+
+When you are done with testing you can stop the docker instance with `make stop`.
+
 ### check code quality
 
 ```sh
