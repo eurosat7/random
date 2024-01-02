@@ -59,7 +59,7 @@ $sequence = Generator::generate([
 ], 32, false);
 
 expect('generate sequence', $sequence);
-
+//</editor-fold>
 
 function expect(string $label, mixed $realdata, mixed $expecteddata = null): void
 {
