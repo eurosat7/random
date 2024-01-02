@@ -36,8 +36,22 @@ It has some nice defaults, but you can expand it should you ever need to.
     ], 32, false);
 ```
 
-## check code quality
+## check code
+
+Have `make`, `docker` and `docker-compose` installed.
+
+### check code quality
 
 ```sh
     make test
 ```
+
+Will run `rector`, `phpcpd`, `phpmd`, `phpstan` and `psalm`.
+
+### check code functionality
+
+```sh
+    make docker-php-test
+```
+
+It just runs `test/test.php` in a docker instance.
