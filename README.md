@@ -35,3 +35,9 @@ It has some nice defaults, but you can expand it should you ever need to.
         Charsets::whitespace(),
     ], 32, false);
 ```
+
+## check code quality
+
+```sh
+    make test
+```

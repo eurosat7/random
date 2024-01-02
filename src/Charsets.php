@@ -3,6 +3,9 @@ declare(strict_types=1);
 
 namespace Eurosat7\Random;
 
+/**
+ * @SuppressWarnings(PHPMD.StaticAccess)
+ */
 class Charsets
 {
     /**
@@ -10,15 +13,10 @@ class Charsets
      */
     public static function numeric(): array
     {
-        return range('0', '9');
-    }
-
-    /**
-     * @return string[]
-     */
-    public static function alphanumeric(): array
-    {
-        return range('a', 'z');
+        return // range('0', '9');
+            [
+                '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'
+            ];
     }
 
     /**
@@ -45,9 +43,20 @@ class Charsets
     /**
      * @return string[]
      */
-    public static function vowels(): array
+    public static function nonexplosives(): array
     {
-        return ['a', 'e', 'i', 'o', 'u'];
+        return Transformer::removeFromSet(
+            self::alphanumeric(),
+            [... self::explosives(), ... self::vowels()]
+        );
+    }
+
+    /**
+     * @return string[]
+     */
+    public static function alphanumeric(): array
+    {
+        return range('a', 'z');
     }
 
     /**
@@ -56,19 +65,18 @@ class Charsets
     public static function explosives(): array
     {
         return [
-            ['b', 'd', 'g', 'k', 'p', 't']
+            'b', 'd', 'g', 'k', 'p', 't'
         ];
     }
 
     /**
      * @return string[]
      */
-    public static function nonexplosives(): array
+    public static function vowels(): array
     {
-        return Transformer::removeFromSet(
-            self::alphanumeric(),
-            [... self::explosives(), ... self::vowels()]
-        );
+        return [
+            'a', 'e', 'i', 'o', 'u'
+        ];
     }
 
     /**

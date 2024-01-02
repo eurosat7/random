@@ -5,14 +5,21 @@ namespace Eurosat7\Random;
 
 use Random\RandomException;
 
+/**
+ * @SuppressWarnings(PHPMD.StaticAccess)
+ */
 class Generator
 {
     /**
+     * @param string[] $set
      * @throws RandomException
      */
     private static function pickOne(array $set): string
     {
         $max = count($set) - 1;
+        if ($max < 1) {
+            throw new RandomException('empty set');
+        }
         $index = random_int(0, $max);
         return ($set[$index]);
     }
@@ -20,6 +27,7 @@ class Generator
     /**
      * @param string[][] $sets
      * @throws RandomException
+     * @SuppressWarnings("boolean")
      */
     public static function generate(array $sets, int $length, bool $shuffle = true): string
     {
@@ -84,7 +92,7 @@ class Generator
      */
     public static function speakable(int $length = 8): string
     {
-        $suffix = ceil(sqrt($length)) - 1;
+        $suffix = (int)ceil(sqrt($length)) - 1;
         if ($suffix < 1) $suffix = 1;
         if ($suffix > 3) $suffix = 3;
 
