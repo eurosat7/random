@@ -29,7 +29,7 @@ phpmd:
 	./vendor/bin/phpmd src text cleancode,codesize,design,unusedcode,controversial
 
 phpstan:
-	php vendor/bin/phpstan
+	./vendor/bin/phpstan
 
 psalm:
 	./vendor/bin/psalm

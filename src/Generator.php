@@ -27,7 +27,7 @@ class Generator
     /**
      * @param string[][] $sets
      * @throws RandomException
-     * @SuppressWarnings("boolean")
+     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
      */
     public static function generate(array $sets, int $length, bool $shuffle = true): string
     {
