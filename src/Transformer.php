@@ -66,7 +66,7 @@ class Transformer
     /**
      * @param string[] $in
      */
-    public function arrayToString(array $in): string
+    public static function arrayToString(array $in): string
     {
         return implode('', $in);
     }
@@ -74,7 +74,7 @@ class Transformer
     /**
      * @return string[]
      */
-    public function stringToArray(string $in): array
+    public static function stringToArray(string $in): array
     {
         return str_split($in);
     }

@@ -31,16 +31,17 @@ class Generator
      */
     public static function generate(array $sets, int $length, bool $shuffle = true): string
     {
-        $result = '';
-        while (strlen($result) < $length) {
+        $result = [];
+        while (count($result) < $length) {
             foreach ($sets as $set) {
-                $result .= self::pickOne($set); // we do not remove used elements!
+                $result [] = self::pickOne($set); // we do not remove used elements!
             }
         }
         if ($shuffle) {
-            $result = str_shuffle($result); // this shuffle does not need to be "secure" - the source is already secure.
+            shuffle($result);
         }
-        return substr($result, 0, $length);
+        $result = array_slice($result, 0, $length);
+        return Transformer::arrayToString($result);
     }
 
     /**

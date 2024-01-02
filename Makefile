@@ -1,6 +1,6 @@
 default: init
 
-init: get-phpcpd composer start docker-test docker-sql docker-php-csv docker-php-test
+init: get-phpcpd composer start docker-test docker-php-test
 
 test: rector phpcpd phpmd phpstan psalm
 
@@ -20,13 +20,6 @@ start:
 
 stop:
 	docker-compose down
-
-docker-sql:
-	docker exec -i csvimporter_mysql-csvimporter_1 mysql -uroot -pexample < dist/fixtures.sql
-	echo "database, table and account should be created now."
-
-docker-php-csv:
-	docker-compose exec webserver php public/generatecsv.php
 
 rector:
 	./vendor/bin/rector -n
