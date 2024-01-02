@@ -21,7 +21,7 @@ class Generator
             throw new RandomException('empty set');
         }
         $index = random_int(0, $max);
-        return ($set[$index]);
+        return $set[$index];
     }
 
     /**
@@ -32,7 +32,8 @@ class Generator
     public static function generate(array $sets, int $length, bool $shuffle = true): string
     {
         $result = [];
-        while (count($result) < $length) {
+        $count = 0;
+        while (($count++) < $length) {
             foreach ($sets as $set) {
                 $result [] = self::pickOne($set); // we do not remove used elements!
             }
@@ -40,7 +41,7 @@ class Generator
         if ($shuffle) {
             shuffle($result);
         }
-        $result = array_slice($result, 0, $length);
+        $result = array_slice($result, 0, $length); // no condition in the loop is faster
         return Transformer::arrayToString($result);
     }
 
