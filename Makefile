@@ -38,6 +38,9 @@ phpstan:
 psalm:
 	./vendor/bin/psalm
 
+phan:
+	./vendor/bin/phan  --allow-polyfill-parser -m verbose
+
 docker-php-test:
 	docker-compose exec webserver php test/test.php
 
@@ -59,11 +62,7 @@ pdepend:
 		--summary-xml=pdepend/summary.xml \
 		--debug \
 		src
-
 #		--coverage-report=pdepend/coverage.report \
-
-phan:
-	./vendor/bin/phan  --allow-polyfill-parser -m verbose
 
 phpdoc:
 	./phpdoc.phar --target=documentation --directory=src --cache-folder=documentation/cache

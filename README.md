@@ -46,6 +46,14 @@ For testing the docker instance should be started - can be done with `make start
 
 When you are done with testing you can stop the docker instance with `make stop`.
 
+### check code functionality
+
+```sh
+    make docker-php-test
+```
+
+It just runs `test/test.php` in a docker instance.
+
 ### check code quality
 
 ```sh
@@ -54,10 +62,16 @@ When you are done with testing you can stop the docker instance with `make stop`
 
 Will run `rector`, `phpcpd`, `phpmd`, `phpstan`,  `psalm` and `phan`.
 
-### check code functionality
+#### do more with the code
 
 ```sh
-    make docker-php-test
+    make pdepend
 ```
 
-It just runs `test/test.php` in a docker instance.
+```sh
+    make phpdoc
+```
+
+```sh
+    make phpinsights
+```
