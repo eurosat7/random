@@ -76,6 +76,6 @@ class Charsets
      */
     public static function whitespace(): array
     {
-        return ["\r", "\n", "\t", " "];
+        return ["\r", "\n", "\t", ' '];
     }
 }

@@ -53,12 +53,12 @@ class Transformer
 
     public function arrayToString(array $in): string
     {
-        return implode("", $in);
+        return implode('', $in);
     }
 
     public function stringToArray(string $in): array
     {
-        return str_split($in, 1);
+        return str_split($in);
     }
 
 }

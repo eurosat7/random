@@ -3,26 +3,41 @@ declare(strict_types=1);
 
 namespace Eurosat7\Random;
 
+use Random\RandomException;
+
 class Generator
 {
     /**
+     * @throws RandomException
+     */
+    private static function pickOne(array $set): string
+    {
+        $max = count($set) - 1;
+        $index = random_int(0, $max);
+        return ($set[$index]);
+    }
+
+    /**
      * @param string[][] $sets
+     * @throws RandomException
      */
     public static function generate(array $sets, int $length, bool $shuffle = true): string
     {
-        $result = "";
+        $result = '';
         while (strlen($result) < $length) {
             foreach ($sets as $set) {
-                $index = array_rand($set);
-                $result .= $set[$index]; // we do not remove used elements!
+                $result .= self::pickOne($set); // we do not remove used elements!
             }
         }
         if ($shuffle) {
-            $result = str_shuffle($result);
+            $result = str_shuffle($result); // this shuffle does not need to be "secure" - the source is already secure.
         }
         return substr($result, 0, $length);
     }
 
+    /**
+     * @throws RandomException
+     */
     public static function numerical(int $length = 8): string
     {
         return self::generate(
@@ -33,6 +48,9 @@ class Generator
         );
     }
 
+    /**
+     * @throws RandomException
+     */
     public static function password(int $length = 16): string
     {
         return self::generate(
@@ -47,6 +65,9 @@ class Generator
         );
     }
 
+    /**
+     * @throws RandomException
+     */
     public static function easy(int $length = 16): string
     {
         return self::generate(
@@ -58,6 +79,9 @@ class Generator
         );
     }
 
+    /**
+     * @throws RandomException
+     */
     public static function speakable(int $length = 8): string
     {
         $suffix = ceil(sqrt($length)) - 1;

@@ -3,5 +3,8 @@
     "psr-4": {
       "Eurosat7\\Random\\": "src/"
     }
+  },
+  "require": {
+    "php": ">=8.2"
   }
 }
