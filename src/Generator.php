@@ -67,8 +67,25 @@ class Generator
                 Charsets::numeric(),
                 Charsets::alphanumeric(),
                 Transformer::setToUppercase(Charsets::alphanumeric()),
-                [... Charsets::umlaut(), ... Transformer::setToUppercase(Charsets::umlaut())],
                 Charsets::special(),
+            ],
+            length: $length
+        );
+    }
+
+    /**
+     * Allows Umlauts
+     *
+     * @throws RandomException
+     */
+    public static function passwordDE(int $length = 16): string
+    {
+        return self::generate(
+            sets: [
+                Charsets::numeric(),
+                Charsets::alphanumeric(),
+                Transformer::setToUppercase(Charsets::alphanumeric()),
+                [...Charsets::special(), ... Charsets::umlaut(), ... Transformer::setToUppercase(Charsets::umlaut())],
             ],
             length: $length
         );

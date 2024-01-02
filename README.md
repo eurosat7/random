@@ -32,7 +32,7 @@ It has some nice defaults, but you can expand it should you ever need to.
           ... Charsets::vowels(),
           ... Charsets::umlaut(),
         ],
-        Charsets::whitespace(),
+        Charsets::explosives(),
     ], 32, false);
 ```
 
