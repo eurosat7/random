@@ -16,7 +16,13 @@ class CustomGenerator
      */
     public static function easy(int $length = 16): string
     {
-        return Generator::generate(sets: [Charsets::numeric(), Charsets::alphanumeric(),], length: $length);
+        return Generator::generate(
+            sets: [
+                Charsets::numeric(),
+                Charsets::alphanumeric(),
+            ],
+            length: $length
+        );
     }
 
     /**
@@ -30,7 +36,11 @@ class CustomGenerator
             sets: [
                 Charsets::numeric(), Charsets::alphanumeric(),
                 Transformer::toUppercase(Charsets::alphanumeric()),
-                [...Charsets::special(), ... Charsets::umlaut(), ... Transformer::toUppercase(Charsets::umlaut())],
+                [
+                    ...Charsets::special(),
+                    ... Charsets::umlaut(),
+                    ... Transformer::toUppercase(Charsets::umlaut())
+                ],
             ],
             length: $length
         );
@@ -41,23 +51,35 @@ class CustomGenerator
      */
     public static function speakable(int $length = 8): string
     {
-        $suffix = (int) ceil(sqrt($length)) - 1;
-        if ($suffix < 1) {
-            $suffix = 1;
-        }
-        if ($suffix > 3) {
-            $suffix = 3;
-        }
+        $suffix = self::getSuffix($length);
 
         $result = Generator::generate(
-            sets: [Charsets::explosives(), Charsets::vowels(), Charsets::nonexplosives(),],
+            sets: [
+                Charsets::explosives(),
+                Charsets::vowels(),
+                Charsets::nonexplosives(),
+            ],
             length: $length - $suffix,
             shuffle: false
         );
         $result .= Generator::generate(
-            sets: [Charsets::numeric(),],
+            sets: [
+                Charsets::numeric(),
+            ],
             length: $suffix
         );
         return ucfirst($result);
+    }
+
+    public static function getSuffix(int $length): int
+    {
+        $suffix = (int) ceil(sqrt($length)) - 1;
+        if ($suffix < 1) {
+            return 1;
+        }
+        if ($suffix > 3) {
+            return 3;
+        }
+        return $suffix;
     }
 }

@@ -42,7 +42,10 @@ class Charsets
      */
     public static function nonexplosives(): array
     {
-        return Transformer::removeFromSet(self::alphanumeric(), [... self::explosives(), ... self::vowels()]);
+        return Transformer::removeFromSet(
+            self::alphanumeric(),
+            [... self::explosives(), ... self::vowels()]
+        );
     }
 
     /**

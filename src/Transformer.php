@@ -19,7 +19,7 @@ class Transformer
     public static function toLowercase(array $set): array
     {
         return array_map(
-            static fn (string $value): string => strtolower($value),
+            static fn(string $value): string => strtolower($value),
             $set
         );
     }

@@ -16,7 +16,12 @@ class Generator
      */
     public static function numerical(int $length = 8): string
     {
-        return self::generate(sets: [Charsets::numeric()], length: $length);
+        return self::generate(
+            sets: [
+                Charsets::numeric()
+            ],
+            length: $length
+        );
     }
 
     /**
