@@ -20,11 +20,13 @@ class Shuffle
      */
     public static function shuffle(array $set): array
     {
-        $len = count($set);
-        for ($i = $len * 2; $i >= 0; $i--) {
-            $a = random_int(0, $len);
-            $b = random_int(0, $len);
-            [$set[$a], $set[$b]] = [$set[$b], $set[$a]];
+        $len = count($set) - 1;
+        if ($len > 2) {
+            for ($i = $len * 2; $i >= 0; $i--) {
+                $a = random_int(0, $len);
+                $b = random_int(0, $len);
+                [$set[$a], $set[$b]] = [$set[$b], $set[$a]];
+            }
         }
         return $set;
     }
