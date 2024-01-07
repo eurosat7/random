@@ -18,13 +18,14 @@ It has some nice defaults, but you can expand it should you ever need to.
 ### power user
 
 ```php
+    use Eurosat7\Random\Arrays;
     use Eurosat7\Random\Charsets;
     use Eurosat7\Random\Generator;
     use Eurosat7\Random\Transformer;
 
     $mySet = str_split('All your base are belong to us!');
-    $mySet = Transformer::removeFromSet($mySet, ['!']);
-    $mySet = Transformer::removeFromSet($mySet, Charsets::whitespace());
+    $mySet = Arrays::removeFromSet($mySet, ['!']);
+    $mySet = Arrays::removeFromSet($mySet, Charsets::whitespace());
     $sequence = Generator::generate([
         $mySet,
         Transformer::toUppercase(Charsets::nonexplosives()),

@@ -4,6 +4,7 @@
 
 declare(strict_types=1);
 
+use Eurosat7\Random\Arrays;
 use Eurosat7\Random\Charsets;
 use Eurosat7\Random\CustomGenerator;
 use Eurosat7\Random\Generator;
@@ -24,7 +25,7 @@ expect('whitespace', Charsets::whitespace());
 //</editor-fold>
 
 //<editor-fold desc="Transformer">
-expect('removeFromSet', Transformer::removeFromSet(Charsets::vowels(), ['a', 'o']));
+expect('removeFromSet', Arrays::removeFromSet(Charsets::vowels(), ['a', 'o']));
 expect('setToUppercase', Transformer::toUppercase([... Charsets::vowels(), ... Charsets::explosives()]));
 expect('setToLowercase', Transformer::toLowercase(['P', 'H', 'P']));
 expect('setToRandomcase', Transformer::toRandomcase([... Charsets::vowels(), ... Charsets::explosives()]));
@@ -47,8 +48,8 @@ expect('speakable', CustomGenerator::speakable());
 
 //<editor-fold desc="power user">
 $mySet = str_split('All your base are belong to us!');
-$mySet = Transformer::removeFromSet($mySet, ['!']);
-$mySet = Transformer::removeFromSet($mySet, Charsets::whitespace());
+$mySet = Arrays::removeFromSet($mySet, ['!']);
+$mySet = Arrays::removeFromSet($mySet, Charsets::whitespace());
 $sequence = Generator::generate([
     $mySet,
     Transformer::toUppercase(Charsets::nonexplosives()),

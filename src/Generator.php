@@ -38,12 +38,12 @@ class Generator
         while ($count < $length) {
             $count++;
             foreach ($sets as $set) {
-                $result[] = self::pickOne($set);
+                $result[] = Arrays::pickOne($set);
                 // we do not remove used elements!
             }
         }
         if ($shuffle) {
-            shuffle($result);
+            $result = Shuffle::shuffle($result);
         }
         $result = array_slice($result, 0, $length);
         // no condition in the loop is faster
@@ -64,20 +64,5 @@ class Generator
             ],
             length: $length
         );
-    }
-
-    /**
-     * @param array<int, string> $set
-     *
-     * @throws RandomException
-     */
-    private static function pickOne(array $set): string
-    {
-        $max = count($set) - 1;
-        if ($max < 1) {
-            throw new RandomException('empty set');
-        }
-        $index = random_int(0, $max);
-        return $set[$index];
     }
 }

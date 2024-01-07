@@ -53,23 +53,6 @@ class Transformer
     }
 
     /**
-     * @param array<int, string> $set
-     * @param array<int, string> $unwanted
-     *
-     * @return array<int, string>
-     */
-    public static function removeFromSet(array $set, array $unwanted): array
-    {
-        $result = [];
-        foreach ($set as $char) {
-            if (!in_array($char, $unwanted, true)) {
-                $result[] = $char;
-            }
-        }
-        return $result;
-    }
-
-    /**
      * @throws RandomException
      */
     private static function randomCase(string $value): string
