@@ -57,6 +57,6 @@ class Transformer
      */
     private static function randomCase(string $value): string
     {
-        return random_int(0, mt_getrandmax()) % 2 === 0 ? strtoupper($value) : strtolower($value);
+        return random_int(0, 1) % 2 === 0 ? strtoupper($value) : strtolower($value);
     }
 }
