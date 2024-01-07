@@ -4,7 +4,19 @@ This small lib generates usernames, passwords, tokens.
 
 It has some nice defaults, but you can expand it should you ever need to.
 
-## usage
+## Disclaimer
+
+This code is not mathematical proofen to be perfectly random.
+
+I ran some tests with bigger numbers and it is random enough for me.
+
+Decide for yourself if you need more.
+
+All randomess I did comes from random_int().
+
+The algorythm I used to shuffle the positions of each character is a Fisher–Yates shuffle.
+
+## Usage
 
 ```php
     use Eurosat7\Random\CustomGenerator;use Eurosat7\Random\Generator;
@@ -15,7 +27,7 @@ It has some nice defaults, but you can expand it should you ever need to.
     $speakable = CustomGenerator::speakable();
 ```
 
-### power user
+### Power Useage
 
 ```php
     use Eurosat7\Random\Arrays;
@@ -37,7 +49,7 @@ It has some nice defaults, but you can expand it should you ever need to.
     ], 32, false);
 ```
 
-## check code
+## Check Code
 
 Have `make`, `docker` and `docker-compose` installed.
 
@@ -47,7 +59,7 @@ For testing the docker instance should be started - can be done with `make start
 
 When you are done with testing you can stop the docker instance with `make stop`.
 
-### check code functionality
+### Check Code Functionality
 
 ```sh
     make docker-php-test
@@ -55,7 +67,7 @@ When you are done with testing you can stop the docker instance with `make stop`
 
 It just runs `test/test.php` in a docker instance.
 
-### check code quality
+### Check Code Quality
 
 ```sh
     make test
@@ -63,7 +75,7 @@ It just runs `test/test.php` in a docker instance.
 
 Will run `rector`, `phpcpd`, `phpmd`, `phpstan`,  `psalm` and `phan`.
 
-#### do more with the code
+#### Do more with the code
 
 ```sh
     make pdepend
