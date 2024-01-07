@@ -15,6 +15,7 @@ include(dirname(__DIR__) . '/vendor/autoload.php');
 //<editor-fold desc="Charsets">
 expect('numeric', Charsets::numeric());
 expect('alphanumeric', Charsets::alphanumeric());
+expect('hexadecimal', Charsets::hexadecimal());
 expect('special', Charsets::special());
 expect('umlaut', Charsets::umlaut());
 
@@ -24,24 +25,23 @@ expect('nonexplosives', Charsets::nonexplosives());
 expect('whitespace', Charsets::whitespace());
 //</editor-fold>
 
-//<editor-fold desc="Transformer">
+//<editor-fold desc="Arrays">
 expect('removeFromSet', Arrays::removeFromSet(Charsets::vowels(), ['a', 'o']));
+//</editor-fold>
+
+//<editor-fold desc="Transformer">
 expect('setToUppercase', Transformer::toUppercase([... Charsets::vowels(), ... Charsets::explosives()]));
 expect('setToLowercase', Transformer::toLowercase(['P', 'H', 'P']));
 expect('setToRandomcase', Transformer::toRandomcase([... Charsets::vowels(), ... Charsets::explosives()]));
-
-expect('stringToArray', str_split('Hello world!'));
-
-$l = 'l';
-$array = ['H', 'e', $l, $l, 'o'];
-
-expect('arrayToString', implode('', $array));
+// removed from Transformer class: stringToArray, arrayToString
 //</editor-fold>
+
 
 //<editor-fold desc="Generator">
 expect('password', Generator::password());
-expect('passwordDE', CustomGenerator::passwordDE());
 expect('numerical', Generator::numerical());
+
+expect('passwordDE', CustomGenerator::passwordDE());
 expect('easy', CustomGenerator::easy());
 expect('speakable', CustomGenerator::speakable());
 //</editor-fold>
@@ -61,6 +61,13 @@ $sequence = Generator::generate([
 ], 32, false);
 
 expect('generate sequence', $sequence);
+
+$sequence = Generator::generate([
+    Charsets::hexadecimal()
+], 256, true);
+
+expect('generate hexadecimal sequence', $sequence);
+
 //</editor-fold>
 
 function expect(string $label, mixed $realdata, mixed $expecteddata = null): void
