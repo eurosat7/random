@@ -4,22 +4,23 @@ declare(strict_types=1);
 
 namespace Eurosat7\Random;
 
-use Random\RandomException;
+use Eurosat7\Random\Exception\InvalidLengthException;
+use Eurosat7\Random\Exception\LogicException;
 
-/**
- * @SuppressWarnings(PHPMD.StaticAccess)
- */
 class CustomGenerator
 {
     /**
-     * @throws RandomException
+     * @throws LogicException
      */
     public static function easy(int $length = 16): string
     {
+        if ($length < 1) {
+            throw new InvalidLengthException('length must be greater than 0');
+        }
         return Generator::generate(
             sets: [
                 Charsets::numeric(),
-                Charsets::alphanumeric(),
+                Charsets::lowercase(),
             ],
             length: $length
         );
@@ -28,18 +29,21 @@ class CustomGenerator
     /**
      * Allows Umlauts
      *
-     * @throws RandomException
+     * @throws LogicException
      */
     public static function passwordDE(int $length = 16): string
     {
+        if ($length < 1) {
+            throw new InvalidLengthException('length must be greater than 0');
+        }
         return Generator::generate(
             sets: [
-                Charsets::numeric(), Charsets::alphanumeric(),
-                Transformer::toUppercase(Charsets::alphanumeric()),
+                Charsets::numeric(),
+                Charsets::lowercase(),
+                Charsets::uppercase(),
                 [
                     ...Charsets::special(),
-                    ... Charsets::umlaut(),
-                    ... Transformer::toUppercase(Charsets::umlaut())
+                    ...Charsets::german(),
                 ],
             ],
             length: $length
@@ -47,10 +51,13 @@ class CustomGenerator
     }
 
     /**
-     * @throws RandomException
+     * @throws LogicException
      */
     public static function speakable(int $length = 8): string
     {
+        if ($length < 1) {
+            throw new InvalidLengthException('length must be greater than 0');
+        }
         $suffix = self::getSuffix($length);
 
         $result = Generator::generate(

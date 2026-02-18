@@ -33,7 +33,7 @@ phpcpd:
 	./phpcpd.phar src
 
 phpmd:
-	./vendor/bin/phpmd src text cleancode,codesize,design,unusedcode,controversial
+	./vendor/bin/phpmd src text phpmd.xml
 
 phpstan:
 	./vendor/bin/phpstan

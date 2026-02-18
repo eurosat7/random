@@ -2,8 +2,13 @@ parameters:
   level: 9
   paths:
     - src
+    - test
   strictRules:
     allRules: true
   ergebnis:
     final:
       enabled: false
+    noExtends:
+      classesAllowedToBeExtended:
+        - RuntimeException
+        - Eurosat7\Random\Exception\LogicException

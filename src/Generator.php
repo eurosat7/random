@@ -4,18 +4,22 @@ declare(strict_types=1);
 
 namespace Eurosat7\Random;
 
-use Random\RandomException;
+use Eurosat7\Random\Exception\InvalidLengthException;
+use Eurosat7\Random\Exception\LogicException;
 
-/**
- * @SuppressWarnings(PHPMD.StaticAccess)
- */
+use function array_slice;
+use function implode;
+
 class Generator
 {
     /**
-     * @throws RandomException
+     * @throws LogicException
      */
     public static function numerical(int $length = 8): string
     {
+        if ($length < 1) {
+            throw new InvalidLengthException('length must be greater than 0');
+        }
         return self::generate(
             sets: [
                 Charsets::numeric()
@@ -29,12 +33,13 @@ class Generator
      *
      * @param array<int, array<int, string>> $sets
      *
-     * @throws RandomException
-     *
-     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
+     * @throws LogicException
      */
     public static function generate(array $sets, int $length, bool $shuffle = true): string
     {
+        if ($length < 1) {
+            throw new InvalidLengthException('length must be greater than 0');
+        }
         $result = [];
         $count = 0;
         foreach ($sets as $set) {
@@ -50,7 +55,7 @@ class Generator
             $result = Shuffle::shuffle($result);
         }
         $result = array_slice($result, 0, $length);
-        return \implode('', $result);
+        return implode('', $result);
     }
 
     /**
@@ -58,12 +63,13 @@ class Generator
      *
      * @param array<int, array<int, string>> $sets
      *
-     * @throws RandomException
-     *
-     * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
+     * @throws LogicException
      */
     public static function generateBiased(array $sets, int $length, bool $shuffle = true): string
     {
+        if ($length < 1) {
+            throw new InvalidLengthException('length must be greater than 0');
+        }
         $result = [];
         $count = 0;
         while ($count < $length) {
@@ -76,19 +82,22 @@ class Generator
             $result = Shuffle::shuffle($result);
         }
         $result = array_slice($result, 0, $length);
-        return \implode('', $result);
+        return implode('', $result);
     }
 
     /**
-     * @throws RandomException
+     * @throws LogicException
      */
     public static function password(int $length = 16): string
     {
+        if ($length < 1) {
+            throw new InvalidLengthException('length must be greater than 0');
+        }
         return self::generateBiased(
             sets: [
                 Charsets::numeric(),
-                Charsets::alphanumeric(),
-                Transformer::toUppercase(Charsets::alphanumeric()),
+                Charsets::lowercase(),
+                Charsets::uppercase(),
                 Charsets::special(),
             ],
             length: $length

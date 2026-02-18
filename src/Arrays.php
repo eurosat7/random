@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Eurosat7\Random;
 
-use Random\RandomException;
+use Eurosat7\Random\Exception\EmptySetException;
+use Eurosat7\Random\Exception\LogicException;
+use Eurosat7\Random\Exception\OutOfRandomException;
+use Throwable;
 
-/**
- * @SuppressWarnings(PHPMD.StaticAccess)
- */
 class Arrays
 {
     /**
@@ -19,27 +19,26 @@ class Arrays
      */
     public static function removeFromSet(array $set, array $unwanted): array
     {
-        $result = [];
-        foreach ($set as $char) {
-            if (!in_array($char, $unwanted, true)) {
-                $result[] = $char;
-            }
-        }
-        return $result;
+        return array_values(array_diff($set, $unwanted));
     }
 
     /**
      * @param array<int, string> $set
      *
-     * @throws RandomException
+     * @throws LogicException
      */
     public static function pickOne(array $set): string
     {
         $max = count($set) - 1;
-        if ($max < 1) {
-            throw new RandomException('empty set');
+        if ($max < 0) {
+            throw new EmptySetException('set must not be empty');
         }
-        $index = random_int(0, $max);
+        try {
+            $index = random_int(0, $max);
+        } catch (Throwable $e) {
+            throw new OutOfRandomException($e->getMessage(), (int) $e->getCode(), $e);
+        }
+
         return $set[$index];
     }
 }

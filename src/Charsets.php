@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace Eurosat7\Random;
 
-/**
- * @SuppressWarnings(PHPMD.StaticAccess)
- */
 class Charsets
 {
     /**
@@ -14,11 +11,24 @@ class Charsets
      */
     public static function hexadecimal(): array
     {
-        return // range('0', 'f');
-            [
-                '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-                'a', 'b', 'c', 'd', 'e', 'f'
-            ];
+        return [
+            '0',
+            '1',
+            '2',
+            '3',
+            '4',
+            '5',
+            '6',
+            '7',
+            '8',
+            '9',
+            'a',
+            'b',
+            'c',
+            'd',
+            'e',
+            'f',
+        ];
     }
 
     /**
@@ -26,8 +36,18 @@ class Charsets
      */
     public static function numeric(): array
     {
-        return // range('0', '9');
-            ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+        return [
+            '0',
+            '1',
+            '2',
+            '3',
+            '4',
+            '5',
+            '6',
+            '7',
+            '8',
+            '9',
+        ];
     }
 
     /**
@@ -36,17 +56,55 @@ class Charsets
     public static function special(): array
     {
         return [
-            '!', '"', '#', '$', '%', '&', '\'', '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>',
-            '?', '@', '[', '\\', ']', '^', '_', '`', '{', '|', '}', '~',
+            '!',
+            '"',
+            '#',
+            '$',
+            '%',
+            '&',
+            '\'',
+            '(',
+            ')',
+            '*',
+            '+',
+            ',',
+            '-',
+            '.',
+            '/',
+            ':',
+            ';',
+            '<',
+            '=',
+            '>',
+            '?',
+            '@',
+            '[',
+            '\\',
+            ']',
+            '^',
+            '_',
+            '`',
+            '{',
+            '|',
+            '}',
+            '~',
         ];
     }
 
     /**
      * @return array<int, string>
      */
-    public static function umlaut(): array
+    public static function german(): array
     {
-        return ['ä', 'ö', 'ü', 'ß'];
+        return [
+            'ä',
+            'ö',
+            'ü',
+            'Ä',
+            'Ö',
+            'Ü',
+            'ß',
+        ];
     }
 
     /**
@@ -55,15 +113,18 @@ class Charsets
     public static function nonexplosives(): array
     {
         return Arrays::removeFromSet(
-            self::alphanumeric(),
-            [... self::explosives(), ... self::vowels()]
+            self::lowercase(),
+            [
+                ... self::explosives(),
+                ... self::vowels(),
+            ],
         );
     }
 
     /**
      * @return array<int, string>
      */
-    public static function alphanumeric(): array
+    public static function lowercase(): array
     {
         return range('a', 'z');
     }
@@ -71,9 +132,36 @@ class Charsets
     /**
      * @return array<int, string>
      */
+    public static function uppercase(): array
+    {
+        return range('A', 'Z');
+    }
+
+    /**
+     * @return array<int, string>
+     */
+    public static function alphanumeric(): array
+    {
+        return [
+            ...self::lowercase(),
+            ...self::uppercase(),
+            ...self::numeric(),
+        ];
+    }
+
+    /**
+     * @return array<int, string>
+     */
     public static function explosives(): array
     {
-        return ['b', 'd', 'g', 'k', 'p', 't'];
+        return [
+            'b',
+            'd',
+            'g',
+            'k',
+            'p',
+            't',
+        ];
     }
 
     /**
@@ -81,7 +169,13 @@ class Charsets
      */
     public static function vowels(): array
     {
-        return ['a', 'e', 'i', 'o', 'u'];
+        return [
+            'a',
+            'e',
+            'i',
+            'o',
+            'u',
+        ];
     }
 
     /**
@@ -89,6 +183,11 @@ class Charsets
      */
     public static function whitespace(): array
     {
-        return ["\r", "\n", "\t", ' '];
+        return [
+            "\r",
+            "\n",
+            "\t",
+            ' ',
+        ];
     }
 }

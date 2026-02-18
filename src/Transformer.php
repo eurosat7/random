@@ -4,11 +4,9 @@ declare(strict_types=1);
 
 namespace Eurosat7\Random;
 
-use Random\RandomException;
+use Eurosat7\Random\Exception\OutOfRandomException;
+use Throwable;
 
-/**
- * @SuppressWarnings(PHPMD.StaticAccess)
- */
 class Transformer
 {
     /**
@@ -19,8 +17,8 @@ class Transformer
     public static function toLowercase(array $set): array
     {
         return array_map(
-            static fn(string $value): string => strtolower($value),
-            $set
+            static fn(string $value): string => mb_strtolower($value, 'UTF-8'),
+            $set,
         );
     }
 
@@ -28,14 +26,13 @@ class Transformer
      * @param array<int, string> $set
      *
      * @return array<int, string>
-     *
-     * @throws RandomException
+     * @throws OutOfRandomException
      */
     public static function toRandomcase(array $set): array
     {
         return array_map(
             static fn(string $value): string => self::randomCase($value),
-            $set
+            $set,
         );
     }
 
@@ -47,16 +44,24 @@ class Transformer
     public static function toUppercase(array $set): array
     {
         return array_map(
-            static fn(string $value): string => strtoupper($value),
-            $set
+            static fn(string $value): string => mb_strtoupper($value, 'UTF-8'),
+            $set,
         );
     }
 
     /**
-     * @throws RandomException
+     * @throws OutOfRandomException
      */
     private static function randomCase(string $value): string
     {
-        return random_int(0, 1) % 2 === 0 ? strtoupper($value) : strtolower($value);
+        try {
+            $isUppercase = random_int(0, 1) === 0;
+        } catch (Throwable $e) {
+            throw new OutOfRandomException($e->getMessage(), (int)$e->getCode(), $e);
+        }
+
+        return $isUppercase
+            ? mb_strtoupper($value, 'UTF-8')
+            : mb_strtolower($value, 'UTF-8');
     }
 }
