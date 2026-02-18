@@ -2,7 +2,10 @@ default: init
 
 init: get-phpcpd get-phpdocumentor composer start docker-test docker-php-test
 
-test: rector phpcpd phpmd phpstan psalm phan
+test: phpcs phpunit rector phpcpd phpmd phpstan psalm phan
+
+bash:
+	docker exec -it random-webserver-1 bash
 
 get-phpcpd:
 	wget https://phar.phpunit.de/phpcpd.phar -nc -O ./phpcpd.phar || true
@@ -41,6 +44,12 @@ psalm:
 phan:
 	./vendor/bin/phan  --allow-polyfill-parser -m verbose
 
+phpcs:
+	./vendor/bin/phpcs
+
+phpunit:
+	./vendor/bin/phpunit
+
 docker-php-test:
 	docker-compose exec webserver php test/test.php
 
@@ -66,4 +75,3 @@ pdepend:
 
 phpdoc:
 	./phpdoc.phar --target=documentation --directory=src --cache-folder=documentation/cache
-
