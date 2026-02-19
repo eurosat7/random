@@ -1,9 +1,10 @@
 {
   "require": {
     "php": ">=8.2",
-    "ergebnis/composer-normalize": "^2.41"
+    "ext-zend-opcache": "*"
   },
   "require-dev": {
+    "ergebnis/composer-normalize": "^2.41",
     "ergebnis/phpstan-rules": "^2.1",
     "nunomaduro/phpinsights": "^2.11",
     "pdepend/pdepend": "^2.16",

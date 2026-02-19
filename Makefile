@@ -18,6 +18,9 @@ get-phpdocumentor:
 composer:
 	composer update
 
+composer-prod:
+	composer install --no-dev --optimize-autoloader --classmap-authoritative
+
 start:
 	docker-compose up -d
 	@echo "you can now open the browser at: http://localhost:8189/"
@@ -58,6 +61,9 @@ docker-test:
 
 benchmark:
 	docker-compose exec webserver php benchmark.php
+
+benchmark-prod:
+	docker-compose exec webserver php -d xdebug.mode=off benchmark.php
 
 normalize:
 	composer normalize
