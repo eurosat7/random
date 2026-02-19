@@ -1,7 +1,8 @@
 {
   "require": {
     "php": ">=8.2",
-    "ext-zend-opcache": "*"
+    "ext-zend-opcache": "*",
+    "ext-mbstring": "*"
   },
   "require-dev": {
     "ergebnis/composer-normalize": "^2.41",
