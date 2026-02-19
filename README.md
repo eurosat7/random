@@ -43,7 +43,7 @@ The algorythm I used to shuffle the positions of each character is a Fisher–Ya
         Transformer::toUppercase(Charsets::nonexplosives()),
         [
           ... Charsets::vowels(),
-          ... Charsets::umlaut(),
+          ... Charsets::german(),
         ],
         Charsets::explosives(),
     ], 32, false);
