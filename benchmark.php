@@ -32,10 +32,12 @@ function benchmark(string $name, callable $callable, int $iterations = 10000): v
     printf("Time: %.6f seconds\n", $endTime - $startTime);
     printf("Memory Usage Change: %d bytes\n", $endMemory - $startMemory);
     printf("Peak Memory: %d bytes\n", $peakMemory);
-    echo "-----------------------------------\n";
+    echo "---\n";
 }
 
-echo "Starting Benchmarks...\n\n";
+echo "---\n";
+echo "Starting Benchmarks...\n";
+echo "---\n";
 
 benchmark('Charsets::alphanumeric', static function () {
     Charsets::alphanumeric();
@@ -55,3 +57,13 @@ benchmark('Transformer::toRandomcase (alphanumeric)', static function () use ($a
 benchmark('Arrays::pickOne (alphanumeric)', static function () use ($alphanumericSet) {
     Arrays::pickOne($alphanumericSet);
 }, 100000);
+
+$status = opcache_get_status();
+if ($status!==false && $status['jit']['enabled'] && $status['jit']['on']) {
+    echo "JIT is active!\n";
+    echo 'JIT mode: ' . $status['jit']['kind'] . "\n";
+    echo 'Buffer free: ' . $status['jit']['buffer_free'] . " bytes\n";
+} else {
+    echo "JIT is not enabled.\n";
+}
+echo "---\n";
