@@ -6,12 +6,15 @@ namespace Eurosat7\Random;
 
 class Charsets
 {
+    /** @var array<string, array<int, string>> */
+    private static array $cache = [];
+
     /**
      * @return array<int, string>
      */
     public static function hexadecimal(): array
     {
-        return [
+        return self::$cache['hexadecimal'] ??= [
             '0',
             '1',
             '2',
@@ -36,7 +39,7 @@ class Charsets
      */
     public static function numeric(): array
     {
-        return [
+        return self::$cache['numeric'] ??= [
             '0',
             '1',
             '2',
@@ -55,7 +58,7 @@ class Charsets
      */
     public static function special(): array
     {
-        return [
+        return self::$cache['special'] ??= [
             '!',
             '"',
             '#',
@@ -96,7 +99,7 @@ class Charsets
      */
     public static function german(): array
     {
-        return [
+        return self::$cache['german'] ??= [
             'ä',
             'ö',
             'ü',
@@ -112,11 +115,11 @@ class Charsets
      */
     public static function nonexplosives(): array
     {
-        return Arrays::removeFromSet(
+        return self::$cache['nonexplosives'] ??= Arrays::removeFromSet(
             self::lowercase(),
             [
-                ... self::explosives(),
-                ... self::vowels(),
+                ...self::explosives(),
+                ...self::vowels(),
             ],
         );
     }
@@ -126,7 +129,7 @@ class Charsets
      */
     public static function lowercase(): array
     {
-        return range('a', 'z');
+        return self::$cache['lowercase'] ??= range('a', 'z');
     }
 
     /**
@@ -134,7 +137,7 @@ class Charsets
      */
     public static function uppercase(): array
     {
-        return range('A', 'Z');
+        return self::$cache['uppercase'] ??= range('A', 'Z');
     }
 
     /**
@@ -142,7 +145,7 @@ class Charsets
      */
     public static function alphanumeric(): array
     {
-        return [
+        return self::$cache['alphanumeric'] ??= [
             ...self::lowercase(),
             ...self::uppercase(),
             ...self::numeric(),
@@ -154,7 +157,7 @@ class Charsets
      */
     public static function explosives(): array
     {
-        return [
+        return self::$cache['explosives'] ??= [
             'b',
             'd',
             'g',
@@ -169,7 +172,7 @@ class Charsets
      */
     public static function vowels(): array
     {
-        return [
+        return self::$cache['vowels'] ??= [
             'a',
             'e',
             'i',
@@ -183,7 +186,7 @@ class Charsets
      */
     public static function whitespace(): array
     {
-        return [
+        return self::$cache['whitespace'] ??= [
             "\r",
             "\n",
             "\t",

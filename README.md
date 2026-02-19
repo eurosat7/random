@@ -59,6 +59,18 @@ For testing the docker instance should be started - can be done with `make start
 
 When you are done with testing you can stop the docker instance with `make stop`.
 
+### Benchmark
+
+To run benchmarks for speed and memory usage:
+
+```sh
+docker-compose exec webserver php /var/www/html/benchmark.php
+```
+
+### Preloading
+
+A preloader is available at `src/preload.php`. It is configured in `php.ini` to optimize boot time.
+
 ### Check Code Functionality
 
 ```sh

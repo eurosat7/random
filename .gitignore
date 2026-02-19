@@ -7,3 +7,4 @@
 /.php-cs-fixer.cache
 /.phpunit.cache/test-results
 /.php-cs-fixer.php
+/.phpcs-cache
