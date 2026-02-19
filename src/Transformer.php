@@ -60,8 +60,10 @@ class Transformer
             throw new OutOfRandomException($e->getMessage(), (int)$e->getCode(), $e);
         }
 
-        return $isUppercase
-            ? mb_strtoupper($value, 'UTF-8')
-            : mb_strtolower($value, 'UTF-8');
+        if ($isUppercase) {
+            return mb_strtoupper($value, 'UTF-8');
+        }
+
+        return mb_strtolower($value, 'UTF-8');
     }
 }

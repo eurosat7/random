@@ -56,6 +56,9 @@ docker-php-test:
 docker-test:
 	docker-compose exec webserver make test
 
+benchmark:
+	docker-compose exec webserver php benchmark.php
+
 normalize:
 	composer normalize
 
