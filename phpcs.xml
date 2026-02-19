@@ -15,9 +15,6 @@
     <file>src</file>
     <file>test</file>
 
-    <!-- Include the whole PER Coding Standard -->
-    <rule ref="PER-CS2.0"/>
-
     <!-- Additional rules -->
     <rule ref="Generic.Arrays.DisallowLongArraySyntax"/>
     <rule ref="PSR12.ControlStructures.BooleanOperatorPlacement"/>
